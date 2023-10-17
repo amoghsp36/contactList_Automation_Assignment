@@ -39,9 +39,9 @@ public class stepDefinitions {
 
         if(method.equalsIgnoreCase("POST")){
             response = req.when().post(apiResource.getResource()).then().extract().response();
-//            AddUserResp bearerToken = response.as(AddUserResp.class);
-//            token = bearerToken.getToken();
-//            System.out.println(token);
+            AddUserResp bearerToken = response.as(AddUserResp.class);
+            token = bearerToken.getToken();
+            System.out.println(token);
             System.out.println(response.prettyPrint());
         }
         else if(method.equalsIgnoreCase("GET")){
@@ -67,6 +67,6 @@ public class stepDefinitions {
 
     @Given("user payload {string} {string}")
     public void userPayload(String email, String password) throws IOException {
-        req = given().spec(globalProperties.getReq()).body(buildData.userLoginData(email,password));
+        req = given().spec(globalProperties.getLoginReq()).body(buildData.userLoginData(email,password));
     }
 }

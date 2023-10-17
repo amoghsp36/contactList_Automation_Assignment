@@ -24,12 +24,26 @@ public class GetGlobalProperties {
                     .setContentType(ContentType.JSON)
                     .addFilter(RequestLoggingFilter.logRequestTo(printStream))
                     .addFilter(ResponseLoggingFilter.logResponseTo(printStream))
-                    //.addHeader("Authorization", "Bearer "+token)
                     .build();
             return req;
         }
         return req;
     }
+    public RequestSpecification getLoginReq() throws IOException {
+        PrintStream printStream = new PrintStream(new FileOutputStream("logs.txt"));
+        if(req==null){
+            req = new RequestSpecBuilder()
+                    .setBaseUri(getProperty("baseUrl"))
+                    .setContentType(ContentType.JSON)
+                    .addFilter(RequestLoggingFilter.logRequestTo(printStream))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(printStream))
+                    .addHeader("Authorization", "Bearer "+token)
+                    .build();
+            return req;
+        }
+        return req;
+    }
+
     public String getProperty(String key) throws IOException {
         Properties properties = new Properties();
         String propertyPath = "/Users/testvagrant/Desktop/contactlist_apiautomation_assignment/app/src/test/java/Utils/global.properties";

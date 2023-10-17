@@ -1,0 +1,38 @@
+Request method:	POST
+Request URI:	https://thinking-tester-contact-list.herokuapp.com/users/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer null
+				Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "email": "contact_test8@gmail.com",
+    "password": "myPassword8"
+}
+HTTP/1.1 200 OK
+Server: Cowboy
+Connection: keep-alive
+X-Powered-By: Express
+Set-Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJlMmI0NjRjYzQxNzAwMTM4ZTYwMjUiLCJpYXQiOjE2OTc1Mjc0OTN9.acTm4NsVAq2dV3DfkOxxABKzE8qQ-3VrnlaCz6YN1bw; Max-Age=36000; Path=/; Expires=Tue, 17 Oct 2023 17:24:53 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 284
+Etag: W/"11c-Y1ymJNYkiimLhEWDFnnunR1robc"
+Date: Tue, 17 Oct 2023 07:24:53 GMT
+Via: 1.1 vegur
+
+{
+    "user": {
+        "_id": "652e2b464cc41700138e6025",
+        "firstName": "Test8",
+        "lastName": "User8",
+        "email": "contact_test8@gmail.com",
+        "__v": 3
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJlMmI0NjRjYzQxNzAwMTM4ZTYwMjUiLCJpYXQiOjE2OTc1Mjc0OTN9.acTm4NsVAq2dV3DfkOxxABKzE8qQ-3VrnlaCz6YN1bw"
+}
