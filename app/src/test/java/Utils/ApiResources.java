@@ -1,6 +1,7 @@
 package Utils;
 
 public enum ApiResources {
+    //USER APIs
     AddUserAPI("users"),
     GetUserAPI("users/me"),
     UserLoginAPI("users/login"),
@@ -8,7 +9,9 @@ public enum ApiResources {
     DeleteUserAPI("users/me"),
     UserLogout("users/logout"),
 
-    AddContactAPI("contacts");
+    //CONTACT APIs
+    AddContactAPI("contacts"),
+    GetContactAPI("contacts/");
 
     public String resource;
 

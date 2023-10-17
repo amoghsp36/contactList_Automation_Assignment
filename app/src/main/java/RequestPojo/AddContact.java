@@ -1,20 +1,43 @@
 package RequestPojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class AddContact {
+    @JsonProperty("firstName")
     private String firstName;
+
+    @JsonProperty("lastName")
     private String lastName;
+
+    @JsonProperty("birthdate")
     private String birthdate;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("phone")
     private String phone;
+
+    @JsonProperty("street1")
     private String street1;
+
+    @JsonProperty("street2")
     private String street2;
+
+    @JsonProperty("city")
     private String city;
+
+    @JsonProperty("stateProvince")
     private String stateProvince;
-    private int postalCode;
+
+    @JsonProperty("postalCode")
+    private String postalCode;
+
+    @JsonProperty("country")
     private String country;
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -52,7 +75,7 @@ public class AddContact {
         this.stateProvince = stateProvince;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 

@@ -20,13 +20,13 @@ public class DataProvider {
     @org.testng.annotations.DataProvider
     public Object[][] login_user_data(){
         return new Object[][]{
-                {"contact_list24@gmail.com", "MyPassword24"},
+                {"contact_list22@gmail.com", "MyPassword22"},
         };
     }
     @org.testng.annotations.DataProvider
     public Object[][] add_contact_data(){
         return new Object[][]{
-                {"Test1patch", "User1patch", "jan_2001","contact_list1patch@gmail.com", "1234567890", "street1","street2", "bangalore","province", 1234, "india"},
+                {"TestContact2", "UserContact2", "1999-03-08","contact_list1contact@gmail.com", "9876543210", "street2","street3", "bangalore","province", "12345", "india"},
         };
     }
 }

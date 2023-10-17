@@ -28,23 +28,36 @@ public class E2E_Contact {
         req = given().spec(globalProperties.getReq()).body(buildData.userLoginData(email, password));
         ApiResources apiResource = ApiResources.valueOf("UserLoginAPI");
         System.out.println(apiResource);
-        LoginResp loginResp = new LoginResp();
-        loginToken = loginResp.getToken();
         response = req.when().post(apiResource.getResource()).then().extract().response();
-        //loginResp = response.as(LoginResp.class);
+        LoginResp loginResp = response.as(LoginResp.class);
+        loginToken = loginResp.getToken();
+        System.out.println(loginToken);
         Assert.assertEquals(response.getStatusCode(),200);
         //Assert.assertEquals(loginResp.getUser().getEmail(),"contact_list25@gmail.com");
     }
 
-    @Test(dataProvider = "add_contact_data", dataProviderClass = DataProvider.class,priority = 2)
-    public void add_contact(String fname, String lname, String birthdate, String email, String phone, String street1, String street2, String city, String state, int postalCode, String country) throws IOException {
+    @Test(dataProvider = "add_contact_data", dataProviderClass = DataProvider.class, priority = 2)
+    public void add_contact(String fname, String lname, String birthdate, String email, String phone, String street1, String street2, String city, String state, String postalCode, String country) throws IOException {
+
         req = given().spec(globalProperties.getReq()
                 .header("Authorization","Bearer "+loginToken))
                 .body(buildData.addContactData(fname,lname,birthdate,email,phone,street1,street2,city,state,postalCode,country));
         apiResources = ApiResources.valueOf("AddContactAPI");
+        System.out.println(loginToken);
         System.out.println(apiResources.getResource());
         response = req.when().post(apiResources.getResource()).then().extract().response();
         Assert.assertEquals(response.getStatusCode(),201);
-
     }
+
+    @Test(priority = 3)
+    public void get_contact() throws IOException {
+        req = given().spec(globalProperties.getReq()
+                .header("Authorization","Bearer "+loginToken));
+        apiResources = ApiResources.valueOf("GetContactAPI");
+        System.out.println(apiResources.getResource());
+        response = req.when().get(apiResources.getResource()).then().extract().response();
+
+        Assert.assertEquals(response.getStatusCode(),200);
+    }
+
 }

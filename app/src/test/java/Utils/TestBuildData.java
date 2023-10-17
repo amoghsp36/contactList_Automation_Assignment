@@ -21,12 +21,19 @@ public class TestBuildData {
         return userLogin;
     }
 
-    public AddContact addContactData(String fname, String lname, String birthDate, String email, String phone, String street1, String street2, String city, String state, int postalCode, String country){
+    public AddContact addContactData(String fname, String lname, String birthDate, String email, String phone, String street1, String street2, String city, String state, String postalCode, String country){
         AddContact addContact = new AddContact();
         addContact.setFirstName(fname);
         addContact.setLastName(lname);
         addContact.setBirthdate(birthDate);
-
+        addContact.setEmail(email);
+        addContact.setPhone(phone);
+        addContact.setStreet1(street1);
+        addContact.setStreet2(street2);
+        addContact.setCity(city);
+        addContact.setStateProvince(state);
+        addContact.setPostalCode(postalCode);
+        addContact.setCountry(country);
 
 
         return addContact;

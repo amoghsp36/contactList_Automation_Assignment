@@ -9,4 +9,12 @@ public class LoginResp {
     private User user;
     @JsonProperty("token")
     private String token;
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getToken() {
+        return token;
+    }
 }
