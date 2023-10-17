@@ -5,7 +5,10 @@ public enum ApiResources {
     GetUserAPI("users/me"),
     UserLoginAPI("users/login"),
     UpdateUserAPI("users/me"),
-    DeleteUserAPI("users/me");
+    DeleteUserAPI("users/me"),
+    UserLogout("users/logout"),
+
+    AddContactAPI("contacts");
 
     public String resource;
 

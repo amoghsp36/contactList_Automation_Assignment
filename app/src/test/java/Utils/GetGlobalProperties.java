@@ -15,6 +15,7 @@ import static FeatureDefinitions.stepDefinitions.token;
 
 public class GetGlobalProperties {
     public static RequestSpecification req;
+    public static String token;
 
     public RequestSpecification getReq() throws IOException {
         PrintStream printStream = new PrintStream(new FileOutputStream("logs.txt"));

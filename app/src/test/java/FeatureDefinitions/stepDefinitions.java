@@ -69,4 +69,9 @@ public class stepDefinitions {
     public void userPayload(String email, String password) throws IOException {
         req = given().spec(globalProperties.getLoginReq()).body(buildData.userLoginData(email,password));
     }
+
+    @Given("Authorization header with login token")
+    public void authorizationHeaderWithLoginToken() throws IOException {
+        req = given().spec(globalProperties.getReq().header("Authorization","Bearer "+token));
+    }
 }

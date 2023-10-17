@@ -3,20 +3,10 @@ package ResponsePojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class AddUserResp {
+public class LoginResp {
     @JsonProperty("user")
     private User user;
     @JsonProperty("token")
     private String token;
-
-    public User getUserData() {
-        return user;
-    }
-
-    public String getToken() {
-        return token;
-    }
 }

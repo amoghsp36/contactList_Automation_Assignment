@@ -22,8 +22,9 @@ public class E2E_user {
     TestBuildData buildData = new TestBuildData();
     GetGlobalProperties globalProperties = new GetGlobalProperties();
     ApiResources apiResources;
+    public static String token;
 
-    @Test(dataProvider = "user_data", dataProviderClass = DataProvider.class)
+    @Test(dataProvider = "user_data", dataProviderClass = DataProvider.class,priority = 1)
     public void add_user(String fname, String lname, String email, String password,String method) throws IOException {
         req = given()
                 .spec(globalProperties.getReq())
@@ -46,7 +47,44 @@ public class E2E_user {
             System.out.println(response.prettyPrint());
         }
         Assert.assertEquals(response.getStatusCode(),201);
-        //Assert.assertEquals(globalProperties.getJsonPath(response,"status"),"Created");
+    }
 
+    @Test(dataProvider = "login_user_data", dataProviderClass = DataProvider.class,priority = 2)
+    public void user_login(String email, String password) throws IOException {
+        req = given().spec(globalProperties.getReq()).body(buildData.userLoginData(email, password));
+        ApiResources apiResource = ApiResources.valueOf("UserLoginAPI");
+        System.out.println(apiResource);
+        response = req.when().post(apiResource.getResource()).then().extract().response();
+        Assert.assertEquals(response.getStatusCode(),200);
+    }
+    @Test(priority = 3)
+    public void get_user() throws IOException {
+        System.out.println(token);
+        req = given().spec(globalProperties.getReq().header("Authorization","Bearer "+token));
+        ApiResources apiResource = ApiResources.valueOf("GetUserAPI");
+        System.out.println(apiResource);
+        response = req.when().get(apiResource.getResource()).then().extract().response();
+        Assert.assertEquals(response.getStatusCode(),200);
+    }
+
+    @Test(dataProvider = "update_user_data",dataProviderClass = DataProvider.class,priority = 4)
+    public void update_user(String fname, String lname, String email, String password,String method) throws IOException {
+        System.out.println(token);
+        req = given().spec(globalProperties.getReq().header("Authorization","Bearer "+token))
+                .body(buildData.addUserData(fname, lname, email, password));
+        ApiResources apiResource = ApiResources.valueOf("UpdateUserAPI");
+        System.out.println(apiResource);
+        if(method.equalsIgnoreCase("PATCH")){
+            response = req.when().patch(apiResource.getResource()).then().extract().response();
+        }
+        Assert.assertEquals(response.getStatusCode(),200);
+    }
+    @Test(priority = 5)
+    public void logout_user() throws IOException {
+        req = given().spec(globalProperties.getReq().header("Authorization","Bearer "+token));
+        ApiResources apiResources = ApiResources.valueOf("UserLogout");
+        System.out.println(apiResources.getResource());
+        response = req.when().post(apiResources.getResource()).then().extract().response();
+        Assert.assertEquals(response.getStatusCode(),200);
     }
 }

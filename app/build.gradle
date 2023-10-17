@@ -33,7 +33,7 @@ dependencies {
     implementation 'io.cucumber:cucumber-java:7.13.0'
     implementation 'io.cucumber:cucumber-testng:7.13.0'
     testImplementation 'io.cucumber:cucumber-junit:7.13.0' // Use the correct version
-
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.24.0'
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 }
