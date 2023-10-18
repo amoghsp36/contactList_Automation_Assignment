@@ -11,7 +11,11 @@ public enum ApiResources {
 
     //CONTACT APIs
     AddContactAPI("contacts"),
-    GetContactAPI("contacts/");
+    GetContactAPI("contacts/"),
+    GetContactListAPI("contacts"),
+    UpdateContactAPI("contacts/"),
+    UpdateContactPatchAPI("contacts/"),
+    DeleteContactAPI("contacts/");
 
     public String resource;
 

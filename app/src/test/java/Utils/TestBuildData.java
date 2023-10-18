@@ -2,6 +2,7 @@ package Utils;
 
 import RequestPojo.AddContact;
 import RequestPojo.AddUser;
+import RequestPojo.PatchContact;
 import RequestPojo.UserLogin;
 
 public class TestBuildData {
@@ -34,8 +35,14 @@ public class TestBuildData {
         addContact.setStateProvince(state);
         addContact.setPostalCode(postalCode);
         addContact.setCountry(country);
-
-
         return addContact;
+    }
+
+    public PatchContact patchContactData(String fname, String lname, String birthdate){
+        PatchContact patchContact = new PatchContact();
+        patchContact.setFirstName(fname);
+        patchContact.setLastName(lname);
+        patchContact.setBirthdate(birthdate);
+        return patchContact;
     }
 }

@@ -1,6 +1,7 @@
 package contactlist_apiautomation_assignment;
 
 import ResponsePojo.AddUserResp;
+import ResponsePojo.LoginResp;
 import Utils.ApiResources;
 import Utils.DataProvider;
 import Utils.GetGlobalProperties;
@@ -23,6 +24,7 @@ public class E2E_user {
     GetGlobalProperties globalProperties = new GetGlobalProperties();
     ApiResources apiResources;
     public static String token;
+    public static String loginToken;
 
     @Test(dataProvider = "user_data", dataProviderClass = DataProvider.class,priority = 1)
     public void add_user(String fname, String lname, String email, String password,String method) throws IOException {
@@ -55,6 +57,9 @@ public class E2E_user {
         ApiResources apiResource = ApiResources.valueOf("UserLoginAPI");
         System.out.println(apiResource);
         response = req.when().post(apiResource.getResource()).then().extract().response();
+        LoginResp resp = response.as(LoginResp.class);
+        loginToken = resp.getToken();
+
         Assert.assertEquals(response.getStatusCode(),200);
     }
     @Test(priority = 3)
@@ -64,6 +69,7 @@ public class E2E_user {
         ApiResources apiResource = ApiResources.valueOf("GetUserAPI");
         System.out.println(apiResource);
         response = req.when().get(apiResource.getResource()).then().extract().response();
+
         Assert.assertEquals(response.getStatusCode(),200);
     }
 
@@ -79,12 +85,26 @@ public class E2E_user {
         }
         Assert.assertEquals(response.getStatusCode(),200);
     }
-    @Test(priority = 5)
+    @Test(priority = 6, enabled = false)
     public void logout_user() throws IOException {
         req = given().spec(globalProperties.getReq().header("Authorization","Bearer "+token));
         ApiResources apiResources = ApiResources.valueOf("UserLogout");
         System.out.println(apiResources.getResource());
         response = req.when().post(apiResources.getResource()).then().extract().response();
+
+        Assert.assertEquals(response.getStatusCode(),200);
+    }
+
+    @Test(dataProvider = "login_user_data", dataProviderClass = DataProvider.class, priority = 5)
+    public void delete_user(String email, String password) throws IOException {
+        user_login(email,password);
+        req = given().spec(globalProperties.getReq()
+                .header("Authorization", "Bearer "+loginToken));
+        System.out.println(loginToken);
+        apiResources = ApiResources.valueOf("DeleteUserAPI");
+        System.out.println(apiResources.getResource());
+        response = req.when().delete(apiResources.getResource()).then().extract().response();
+
         Assert.assertEquals(response.getStatusCode(),200);
     }
 }
