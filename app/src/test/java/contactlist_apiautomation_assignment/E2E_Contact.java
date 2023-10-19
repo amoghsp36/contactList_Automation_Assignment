@@ -76,7 +76,7 @@ public class E2E_Contact {
         Assert.assertEquals(response.getStatusCode(),200);
     }
 
-    @Test
+    @Test(priority = 4)
     public void should_get_contact_list() throws IOException {
         //Arrange
         req = given().spec(globalProperties.getReq()
@@ -90,7 +90,7 @@ public class E2E_Contact {
         Assert.assertEquals(response.getStatusCode(),200);
     }
 
-    @Test(dataProvider = "update_contact_data", dataProviderClass = DataProvider.class, priority = 4)
+    @Test(dataProvider = "update_contact_data", dataProviderClass = DataProvider.class, priority = 5)
     public void should_update_contact(String fname, String lname, String birthdate, String email, String phone, String street1, String street2, String city, String state, String postalCode, String country) throws IOException {
         //Arrange
         req = given().spec(globalProperties.getReq()
@@ -106,7 +106,7 @@ public class E2E_Contact {
         Assert.assertEquals(response.getStatusCode(),200);
     }
 
-    @Test(dataProvider = "patch_contact_data", dataProviderClass = DataProvider.class, priority = 5)
+    @Test(dataProvider = "patch_contact_data", dataProviderClass = DataProvider.class, priority = 6)
     public void should_update_patch_contact(String fname, String lname, String birthdate) throws IOException {
         //Arrange
         req = given().spec(globalProperties.getReq()
@@ -120,7 +120,7 @@ public class E2E_Contact {
         Assert.assertEquals(response.statusCode(),200);
     }
 
-    @Test(priority = 6)
+    @Test(priority = 7)
     public void should_delete_contact() throws IOException {
         //Arrange
         req = given().spec(globalProperties.getReq()
